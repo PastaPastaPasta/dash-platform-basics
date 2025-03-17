@@ -1,0 +1,27 @@
+- Getting started
+    - [Quick start](getting-started/quickstart.md)
+- Usage
+    - DAPIClient
+        - [new DAPIClient()](usage/application/DAPIClient.md)
+            - Core
+                - [.broadcastTransaction()](usage/application/core/broadcastTransaction.md)
+                - [.generateToAddress()](usage/application/core/generateToAddress.md)
+                - [.getBestBlockHash()](usage/application/core/getBestBlockHash.md)
+                - [.getBestBlockHeight()](usage/application/core/getBestBlockHeight.md)
+                - [.getBlockByHash()](usage/application/core/getBlockByHash.md)
+                - [.getBlockByHeight()](usage/application/core/getBlockByHeight.md)
+                - [.getBlockHash()](usage/application/core/getBlockHash.md)
+                - [.getStatus()](usage/application/core/getStatus.md)
+                - [.getTransaction()](usage/application/core/getTransaction.md)
+                - [.subscribeToTransactionsWithProofs()](usage/application/core/subscribeToTransactionsWithProofs.md)
+                - [.subscribeToBlockHeadersWithChainLocks()](usage/application/core/subscribeToBlockHeadersWithChainLocks.md)
+                - [.subscribeToMasternodeList()](usage/application/core/subscribeToMasternodeList.md)
+            - Platform 
+                - [.broadcastStateTransition()](usage/application/platform/broadcastStateTransition.md)
+                - [.getStatus()](usage/application/platform/getStatus.md)
+                - [.getDataContract()](usage/application/platform/getDataContract.md)
+                - [.getDocuments()](usage/application/platform/getDocuments.md)
+                - [.getIdentityByFirstPublicKey()](usage/application/platform/getIdentityByFirstPublicKey.md)
+                - [.getIdentity()](usage/application/platform/getIdentity.md)
+                - [.getIdentityIdByFirstPublicKey()](usage/application/platform/getIdentityIdByFirstPublicKey.md)
+- [License](https://github.com/dashevo/dapi-client/blob/master/LICENSE)

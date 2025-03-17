@@ -91,7 +91,9 @@
   </style>
 </head>
 <body>
-  <h1 style="text-align: center; margin-top: 20px; color: #012060;">Dash DPNS Names (Limit 100)</h1>
+  <h1 style="text-align: center; margin-top: 20px; color: #012060;">
+    Dash DPNS Names (Limit 100 per page)
+  </h1>
 
   <div id="controls">
     <label for="networkSelect">Select network:</label>
@@ -105,127 +107,15 @@
   <div id="content"></div>
 
   <footer>
-    <p>Built using <a href="https://docs.dash.org/platform" target="_blank">Dash Platform</a>. All code runs locally, querying the decentralyzed Dash Network. There is no backend.</p>
-    <p style="font-size: 12px; margin-top: 5px;">Unable to validate proofs, do not assume the data presented is correct for production purposes.</p>
+    <p>
+      Built using <a href="https://docs.dash.org/platform" target="_blank">Dash Platform</a>.
+      All code runs locally, querying the decentralized Dash Network. There is no backend.
+    </p>
+    <p style="font-size: 12px; margin-top: 5px;">
+      Unable to validate proofs, do not assume the data presented is correct for production purposes.
+    </p>
   </footer>
 
-  <!-- Include Dash SDK from CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/dash"></script>
-  <script>
-    async function fetchDPNSNames() {
-      const contentDiv = document.getElementById('content');
-      contentDiv.innerHTML = 'Loading...';
-      const networkSelect = document.getElementById('networkSelect');
-      const network = networkSelect.value;
-      
-      // Prepare client options.
-      const clientOptions = { network: network };
-      let client;
-      let documents;
-
-      if (network === 'mainnet') {
-        // For Mainnet, fetch the masternode list to derive dynamic DAPI addresses.
-        // Replace these credentials with your actual ones.
-        const user = "myUser";
-        const pass = "myPass";
-        try {
-          const response = await fetch("https://rpc.digitalcash.dev/", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": "Basic " + btoa(user + ":" + pass)
-            },
-            body: JSON.stringify({
-              method: "masternodelist",
-              params: ["evo"]
-            })
-          });
-          if (!response.ok) {
-            throw new Error("Failed to fetch masternode list: " + response.status);
-          }
-          const data = await response.json();
-          const masternodeList = data.result || data;
-          const addresses = [];
-          for (const key in masternodeList) {
-            const node = masternodeList[key];
-            if (node && node.type === "Evo" && node.platformHTTPPort) {
-              // Extract the IP (e.g., from "149.28.241.190:9999") and combine it with platformHTTPPort.
-              const ip = node.address.split(":")[0];
-              addresses.push(ip + ":" + node.platformHTTPPort);
-            }
-          }
-          if (addresses.length === 0) {
-            contentDiv.innerHTML = 'No valid masternode addresses found.';
-            return;
-          }
-
-          // Attempt up to 5 times using different addresses.
-          let searchSuccessful = false;
-          for (let attempt = 1; attempt <= 5; attempt++) {
-            contentDiv.innerHTML = `Trying attempt ${attempt} of 5...`;
-            const currentAddress = addresses[attempt - 1] || addresses[0];
-            clientOptions.dapiAddresses = [currentAddress];
-            client = new Dash.Client(clientOptions);
-            try {
-              documents = await client.platform.documents.get('dpns.domain', { limit: 100 });
-              client.disconnect();
-              searchSuccessful = true;
-              break;
-            } catch (e) {
-              console.error(`Attempt ${attempt} failed with address ${currentAddress}:`, e);
-              client.disconnect();
-            }
-          }
-          if (!searchSuccessful) {
-            contentDiv.innerHTML = 'All attempts failed to load DPNS names. Check console for details.';
-            return;
-          }
-        } catch (e) {
-          console.error('Error fetching masternode list:', e);
-          contentDiv.innerHTML = 'Failed to load masternode list. Check console for details.';
-          return;
-        }
-      } else {
-        // For Testnet, use default dapiAddresses.
-        client = new Dash.Client(clientOptions);
-        try {
-          documents = await client.platform.documents.get('dpns.domain', { limit: 100 });
-        } catch (error) {
-          console.error('Error fetching DPNS names:', error);
-          contentDiv.innerHTML = 'Failed to load DPNS names. Check console for details.';
-          client.disconnect();
-          return;
-        }
-        client.disconnect();
-      }
-
-      // Process and render the documents.
-      processDocuments(documents);
-    }
-
-    function processDocuments(documents) {
-      const contentDiv = document.getElementById('content');
-      contentDiv.innerHTML = '';
-      if (documents.length === 0) {
-        contentDiv.innerHTML = 'No DPNS names found.';
-        return;
-      }
-      const table = document.createElement('table');
-      const header = `<tr><th>Name Label</th><th>Domain</th><th>Owner ID</th></tr>`;
-      table.innerHTML = header;
-      documents.forEach(doc => {
-        const data = doc.getData();
-        const identityUrl = `https://platform-explorer.com/identity/${data.records.identity}`;
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${data.label}</td>
-          <td>${data.parentDomainName}</td>
-          <td><a href="${identityUrl}" target="_blank">${data.records.identity}</a></td>
-        `;
-        table.appendChild(row);
-      });
-      contentDiv.appendChild(table);
-    }
-  </script>
+  <script src="../dist/main.js"></script>
 </body>
 </html>
