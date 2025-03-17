@@ -187,10 +187,6 @@
         }
       } else {
         // For Testnet, use default dapiAddresses.
-        clientOptions.dapiAddresses = [
-          '157.90.178.32:443',
-          '93.115.172.39:443',
-        ];
         client = new Dash.Client(clientOptions);
         try {
           documents = await client.platform.documents.get('dpns.domain', { limit: 100 });
