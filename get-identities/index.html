@@ -11,21 +11,19 @@
 <link rel="stylesheet" href="/dashhq/dashhq-components.css">
 <link rel="icon" href="/dashhq/mark/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/retired.css">
-<title>Retired · Basics · dashhq</title>
-<meta name="description" content="Basics has retired. Use Explorer for username searches and identities with proof checking.">
+<title>Identities and names moved to Explorer · dashhq</title>
+<meta name="description" content="This 2025 demo read Platform without checking proofs. Explorer does the same jobs and verifies what it shows.">
+<script src="/retirement.js" defer></script>
 </head>
-<body>
+<body class="dh-fill">
 <a class="skip" href="#main">Skip to content</a>
-<dashhq-bar product="basics" sticky></dashhq-bar>
+<dashhq-bar product="basics" network="mainnet" networks="mainnet testnet" sticky></dashhq-bar>
 <main id="main" class="dh-container dh-page"><div class="dh-narrow">
-<header class="dh-page-header">
-<p class="dh-page-header__kicker">Platform / Learn</p>
-<h1 class="dh-page-header__title">Basics has retired</h1>
-<p class="dh-page-header__lede">This 2025 demo read Platform without checking proofs. Explorer does the same jobs and verifies what it shows.</p>
-</header>
-<div class="dh-notice dh-notice--info"><p class="dh-notice__title">Continue in Explorer</p><p>Find a username and open the identity behind it in Explorer.</p><p><a class="dh-btn dh-btn--primary" href="https://explorer.dashhq.org/dpns/search/?network=mainnet" data-family="explorer" data-path="/dpns/search/">Search usernames →</a></p></div>
-<p><a class="dh-btn" href="https://dashhq.org/#learn" data-family="home" data-path="/#learn">Learn what identities and names are →</a></p>
-<p class="note">Your bookmark still works here. Choose the link when you are ready to move.</p>
+<dashhq-moved product="basics" network="testnet" to="explorer" path="/dpns/search/" heading="Identities and names moved to Explorer" lede="This 2025 demo read Platform without checking proofs. Explorer does the same jobs and verifies what it shows." label="Search usernames">
+<h1>Identities and names moved to Explorer</h1><p>This 2025 demo read Platform without checking proofs. Explorer does the same jobs and verifies what it shows.</p><p><a href="https://explorer.dashhq.org/dpns/search/?network=testnet">Search usernames →</a></p>
+</dashhq-moved>
+<p><a class="dh-link" href="https://dashhq.org/#learn" data-family="home" data-path="/#learn">Learn what identities and names are →</a></p>
+<noscript><p>JavaScript is off. Use the link above, then select your network in Explorer.</p></noscript>
 </div></main>
 <dashhq-footer product="basics" source="https://github.com/PastaPastaPasta/dash-platform-basics"></dashhq-footer>
 </body>

@@ -1,15 +1,16 @@
 # Basics retirement pages
 
-The 2025 unverified Platform demo has retired. Each existing URL explains why and offers its equivalent Explorer view without automatically redirecting:
+The unverified 2025 demo has retired. Existing URLs explain the move to Explorer,
+then continue after ten seconds. Visitors can choose Stay here to stop forwarding or use
+the destination immediately. The shared shell owns this behaviour. The same header, copy structure, timing and controls
+are used by the retired Vote and Fees pages.
 
-| Bookmark | Explorer destination |
-| --- | --- |
-| `/` | `/` |
-| `/get-identities/` | `/dpns/search` |
-| `/all-dpns/` | `/dpns` |
+The root opens Explorer; `/get-identities/` and `/all-dpns/` open username search.
+An `id` parameter opens its identity, and `name` opens its username. All query
+parameters, the selected network and fragments travel with the bookmark. Unknown
+paths serve the same retirement page with absolute assets and a strict CSP.
 
-All three pages use the same static layout, family shell, tokens and self-hosted Archivo font. The legacy SDK, RPC access and third-party script are removed. The pages make no data requests.
-
-`family-links.js` is a small first-party adapter that resolves the destination through `dashhq.href()` for production, the local lab and network-carrying links. It can be removed when the shell supports declarative family links. This is the only page script besides the unchanged shell. See `SHELL.md` for the shell version and checksum.
-
-Local checks: `node --check family-links.js` and the static copy build. There is no package-managed test, lint or typecheck suite. In the family lab, use `../../lab/build.sh basics` and check all three bookmarks at phone and desktop widths, in both themes.
+Checks: `node --test retirement.test.mjs`, `node --check retirement.js`, and
+`../../lab/build.sh basics`. There is no package-managed lint or typecheck suite.
+The default network remains Testnet for legacy Basics bookmarks. The shared
+footer identifies Basics without marking Explorer as the current page.
