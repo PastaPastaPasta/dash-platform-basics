@@ -1,9 +1,9 @@
 # Basics retirement pages
 
-The unverified 2025 demo has retired. Existing URLs explain the move to Explorer,
-then continue after ten seconds. Visitors can choose Stay here to stop forwarding or use
-the destination immediately. The shared shell owns this behaviour. The same header, copy structure, timing and controls
-are used by the retired Vote and Fees pages.
+The unverified 2025 demo has retired. Existing URLs forward at once to Explorer,
+where the bar says that basics.dashhq.org is now part of it. The shared shell's
+`<dashhq-moved>` owns this behaviour, the same on the retired Vote and Fees pages.
+Without JavaScript each page shows one link to its replacement.
 
 The root opens Explorer; `/get-identities/` and `/all-dpns/` open username search.
 An `id` parameter opens its identity, and `name` opens its username. All query
