@@ -63,7 +63,10 @@ for (const page of pages) {
     const u = new URL(link[1].replaceAll('&amp;', '&'));
     assert.equal(u.origin, home);
     assert.equal(u.searchParams.get('moved-from'), site);
-    assert.ok(u.searchParams.get('network'));
+    if (site === 'basics') {
+      assert.equal(u.searchParams.get('network'), 'testnet');
+      assert.equal(u.pathname, /get-identities|all-dpns/.test(page) ? '/dpns/search/' : '/');
+    } else assert.ok(u.searchParams.get('network'));
     assert.match(p, /<h1 class="dh-page-header__title">/);
     assert.match(p, /<noscript>/);
     assert.match(p, /script-src 'self'/);
