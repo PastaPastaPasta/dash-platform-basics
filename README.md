@@ -6,7 +6,7 @@ The unverified 2025 demo has retired. Its jobs, looking up a username or an iden
 The root is a small lookup page: a username search (Radar `/names?q=<prefix>`) and an identity lookup
 (Radar `/identity/<id>`), plus links to browse all names and all identities. Both forms are plain GET forms that work
 without JavaScript; with it, a username loses a trailing `.dash` and an ID its spaces before the form goes. Everything
-opens on Testnet unless the address names another network.
+opens on Testnet unless the address names another network; that needs JavaScript, and without it the forms always search Testnet.
 
 The old pages forward at once through the shared shell's `<dashhq-moved>`: `/get-identities/` opens Radar's
 identities list and `/all-dpns/` its names list. An `id` parameter on any page opens its identity, and `name` opens

@@ -8,7 +8,10 @@
     moved = main.querySelector('dashhq-moved');
   }
   if (moved) {
-    if (path) moved.setAttribute('path', path);
+    if (path) {
+      moved.setAttribute('path', path);
+      moved.setAttribute('label', path === '/identity/' ? 'Open this identity' : 'Open this username');
+    }
     return;
   }
 
@@ -26,9 +29,13 @@
   }
 
   const name = document.getElementById('name-q');
-  document.getElementById('name-form').addEventListener('submit', () => {
+  document.getElementById('name-form').addEventListener('submit', (e) => {
     name.value = name.value.trim().replace(/^@/, '').replace(/\.dash$/i, '');
+    if (!name.value) { e.preventDefault(); name.reportValidity(); }
   });
   const id = document.getElementById('id-q');
-  document.getElementById('id-form').addEventListener('submit', () => { id.value = id.value.replace(/\s+/g, ''); });
+  document.getElementById('id-form').addEventListener('submit', (e) => {
+    id.value = id.value.replace(/\s+/g, '');
+    if (!id.value) { e.preventDefault(); id.reportValidity(); }
+  });
 })();
